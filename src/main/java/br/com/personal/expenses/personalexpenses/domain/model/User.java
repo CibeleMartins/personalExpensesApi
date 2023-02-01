@@ -24,7 +24,7 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
+    private String name;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(columnDefinition = "TEXT")
-    private String foto;
+    private String photo;
 
 
     @Column(nullable = false)
@@ -56,11 +56,11 @@ public class User implements UserDetails {
     }
 
     public String getNome() {
-        return nome;
+        return name;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.name = nome;
     }
 
     public String getEmail() {
@@ -80,11 +80,11 @@ public class User implements UserDetails {
     }
 
     public String getFoto() {
-        return foto;
+        return photo;
     }
 
     public void setFoto(String foto) {
-        this.foto = foto;
+        this.photo = foto;
     }
 
     public Date getDataCadastro() {
