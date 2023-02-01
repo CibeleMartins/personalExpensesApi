@@ -8,22 +8,45 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class User implements UserDetails {
     
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id_user")
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
 
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
+    @Column(columnDefinition = "TEXT")
     private String foto;
 
+
+    @Column(nullable = false)
     private Date dataCadastro;
     
     private Date dataInativacao;
 
+    // um (one) usuário pode ter muitos (to many) títulos
+    // no parametro, é definido a entidade que é "dona" do relacionamento
+    @OneToMany(mappedBy = "user")
     private List<Title> titles;
-    
+
+
     public Long getId() {
         return id;
     }
@@ -46,6 +69,14 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPasswordUser() {
+        return password;
+    }
+    
+    public void setPasswordUser(String password) {
+        this.password = password;
     }
 
     public String getFoto() {
@@ -80,46 +111,48 @@ public class User implements UserDetails {
         this.titles = titles;
     }
 
+
+    // métodos do UserDetails -> spring security
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
+        //   autorizações específicas
         return null;
     }
 
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
-        return null;
+        // quando o framework tentar pegar o password do usuário
+        return password;
     }
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        return null;
+        // o que será usado como nome de usuário
+        return email;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
+        // a conta vai ter expiração?
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return false;
+       
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
+        // se a credencial não expira
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return false;
+        //    se a conta está ativa
+        return true;
     }
 
    
