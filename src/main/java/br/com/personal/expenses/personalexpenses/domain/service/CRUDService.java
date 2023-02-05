@@ -8,7 +8,7 @@ public interface CRUDService<Req, Res> {
     // todo CRUD vai ter um método obter todos
     List<Res> getAll();
 
-    Res getById();
+    Res getById(Long id);
 
     Res register(Req dto);
 

@@ -1,6 +1,7 @@
 package br.com.personal.expenses.personalexpenses.domain.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -38,9 +39,17 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
     }
 
     @Override
-    public UserResponseDTO getById() {
-        // TODO Auto-generated method stub
-        return null;
+    public UserResponseDTO getById(Long id) {
+
+        Optional<User> optionalUserModel = userRepository.findById(id);
+
+        if(optionalUserModel.isEmpty()) {
+            throw new Error("O usuário não foi encontrado.");
+        }
+
+        UserResponseDTO userResponseDto = mapper.map(optionalUserModel.get(), UserResponseDTO.class);
+
+        return userResponseDto;
     }
 
     @Override
