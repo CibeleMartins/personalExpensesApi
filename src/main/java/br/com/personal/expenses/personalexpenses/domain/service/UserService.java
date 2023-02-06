@@ -57,6 +57,8 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
     public UserResponseDTO register(UserRequestDTO dto) {
 
         User userModel = mapper.map(dto, User.class);
+
+        userModel.setId(null);
         
         userModel = userRepository.save(userModel);
 
@@ -67,8 +69,18 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
 
     @Override
     public UserResponseDTO updateById(Long id, UserRequestDTO dto) {
+
+        getById(id);
+
+        User userModel = mapper.map(dto, User.class);
         
-        return null;
+        userModel.setId(id);
+        
+        userModel = userRepository.save(userModel);
+
+        UserResponseDTO userResponse = mapper.map(userModel, UserResponseDTO.class);
+
+        return userResponse;
     }
     
 }
