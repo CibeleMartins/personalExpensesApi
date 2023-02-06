@@ -25,7 +25,10 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
     @Override
     public void deleteById(Long id) {
        
-        
+        getById(id);
+
+       userRepository.deleteById(id);
+
     }
 
     @Override
@@ -75,7 +78,7 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         User userModel = mapper.map(dto, User.class);
         
         userModel.setId(id);
-        
+
         userModel = userRepository.save(userModel);
 
         UserResponseDTO userResponse = mapper.map(userModel, UserResponseDTO.class);
