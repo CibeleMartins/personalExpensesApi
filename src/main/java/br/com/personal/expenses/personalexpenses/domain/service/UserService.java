@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.com.personal.expenses.personalexpenses.domain.exception.ResourceNotFoundException;
 import br.com.personal.expenses.personalexpenses.domain.model.User;
 import br.com.personal.expenses.personalexpenses.domain.repository.UserRepository;
 import br.com.personal.expenses.personalexpenses.dto.User.UserRequestDTO;
@@ -44,7 +45,7 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         Optional<User> optionalUserModel = userRepository.findById(id);
 
         if(optionalUserModel.isEmpty()) {
-            throw new Error("O usuário não foi encontrado.");
+            throw new ResourceNotFoundException("Usuário não encontrado.");
         }
 
         UserResponseDTO userResponseDto = mapper.map(optionalUserModel.get(), UserResponseDTO.class);
@@ -54,13 +55,19 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
 
     @Override
     public UserResponseDTO register(UserRequestDTO dto) {
-        // TODO Auto-generated method stub
-        return null;
+
+        User userModel = mapper.map(dto, User.class);
+        
+        userModel = userRepository.save(userModel);
+
+        UserResponseDTO userResponse = mapper.map(userModel, UserResponseDTO.class);
+
+        return userResponse;
     }
 
     @Override
     public UserResponseDTO updateById(Long id, UserRequestDTO dto) {
-        // TODO Auto-generated method stub
+        
         return null;
     }
     
