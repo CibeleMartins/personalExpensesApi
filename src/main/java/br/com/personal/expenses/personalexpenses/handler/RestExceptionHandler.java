@@ -13,7 +13,7 @@ import br.com.personal.expenses.personalexpenses.domain.exception.ResourceNotFou
 import br.com.personal.expenses.personalexpenses.domain.model.ErrorResponse;
 
 @ControllerAdvice
-public class RestExceptionHadler {
+public class RestExceptionHandler {
 
     // essa anotação diz ao spring boot só chamar esse método quando a exceção
     // ocorrida for a indicada em seu parametro
