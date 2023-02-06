@@ -86,4 +86,10 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         return userResponse;
     }
     
+
+    // foi criado um método privado para validar o email e senha 
+    // no método de atualizar e cadastrar
+    // não implementei porque vou fazer esse tipo de validação no front end
+
+    
 }
