@@ -1,26 +1,22 @@
 package br.com.personal.expenses.personalexpenses.domain.model;
 
-import java.util.Collection;
 import java.util.Date;
-
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
-public class User implements UserDetails {
+@Table(name = "user_admin")
+public class User {
+    // com a utilizacao de userdetails nao tem como testar o cadastro e atualização de um usuário
     
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "idUser")
     private Long id;
 
     @Column(nullable = false)
@@ -43,8 +39,8 @@ public class User implements UserDetails {
 
     // um (one) usuário pode ter muitos (to many) títulos
     // no parametro, é definido a entidade que é "dona" do relacionamento
-    @OneToMany(mappedBy = "user")
-    private List<Title> titles;
+    // @OneToMany(mappedBy = "user")
+    // private List<Title> titles;
 
 
     public Long getId() {
@@ -103,57 +99,57 @@ public class User implements UserDetails {
         this.dataInativacao = dataInativacao;
     }
 
-    public List<Title> getTitles() {
-        return titles;
-    }
+    // public List<Title> getTitles() {
+    //     return titles;
+    // }
 
-    public void setTitles(List<Title> titles) {
-        this.titles = titles;
-    }
+    // public void setTitles(List<Title> titles) {
+    //     this.titles = titles;
+    // }
 
 
     // métodos do UserDetails -> spring security
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        //   autorizações específicas
-        return null;
-    }
+    // @Override
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
+    //     //   autorizações específicas
+    //     return null;
+    // }
 
-    @Override
-    public String getPassword() {
-        // quando o framework tentar pegar o password do usuário
-        return password;
-    }
+    // @Override
+    // public String getPassword() {
+    //     // quando o framework tentar pegar o password do usuário
+    //     return password;
+    // }
 
-    @Override
-    public String getUsername() {
-        // o que será usado como nome de usuário
-        return email;
-    }
+    // @Override
+    // public String getUsername() {
+    //     // o que será usado como nome de usuário
+    //     return email;
+    // }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        // a conta vai ter expiração?
-        return true;
-    }
+    // @Override
+    // public boolean isAccountNonExpired() {
+    //     // a conta vai ter expiração?
+    //     return true;
+    // }
 
-    @Override
-    public boolean isAccountNonLocked() {
+    // @Override
+    // public boolean isAccountNonLocked() {
        
-        return true;
-    }
+    //     return true;
+    // }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // se a credencial não expira
-        return true;
-    }
+    // @Override
+    // public boolean isCredentialsNonExpired() {
+    //     // se a credencial não expira
+    //     return true;
+    // }
 
-    @Override
-    public boolean isEnabled() {
-        //    se a conta está ativa
-        return true;
-    }
+    // @Override
+    // public boolean isEnabled() {
+    //     //    se a conta está ativa
+    //     return true;
+    // }
 
    
 }

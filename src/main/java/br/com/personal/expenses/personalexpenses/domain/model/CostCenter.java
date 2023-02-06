@@ -6,13 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
-import java.util.List;
 
 @Entity
 @Table(name = "cost_center")
@@ -33,16 +28,16 @@ public class CostCenter {
     // join column define quem é o dono desse relacionamento/ do centro de custo/
     // por isso o id do usuário
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "idUser")
     private User user;
 
     // muitos centros de custo podem estar em muitos titulos
     // a tabela que cria/ "é dona" do relacionamento é a center_cost
     // a segunda anotação define que, ao buscar o centros de custos, irá retornar apenas os centros de custo e não os títulos
     // ex: busco o centro de custo e os titulos, entro no titulo, pego ocentro de custo -> loop infinito
-    @ManyToMany(mappedBy = "cost_center")
-    @JsonBackReference
-    private List<Title> titles;
+    // @ManyToMany(mappedBy = "cost_center")
+    // @JsonBackReference
+    // private List<Title> titles;
 
     public Long getId() {
         return id;
@@ -76,12 +71,12 @@ public class CostCenter {
         this.user = user;
     }
 
-    public List<Title> getTitles() {
-        return titles;
-    }
+    // public List<Title> getTitles() {
+    //     return titles;
+    // }
 
-    public void setTitles(List<Title> titles) {
-        this.titles = titles;
-    } 
+    // public void setTitles(List<Title> titles) {
+    //     this.titles = titles;
+    // } 
 
 }
