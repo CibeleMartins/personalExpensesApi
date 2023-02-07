@@ -28,7 +28,7 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(ResourceBadRequestException.class)
-    public ResponseEntity<ErrorResponse> handlerResourceNotFoundException(ResourceBadRequestException exception) {
+    public ResponseEntity<ErrorResponse> handlerResourceBadRequestException(ResourceBadRequestException exception) {
 
         String dateHour = ConvertDate.convertDateForDateHour(new Date());
 
@@ -37,14 +37,14 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handlerResourceNotFoundException(Exception exception) {
+    // @ExceptionHandler(Exception.class)
+    // public ResponseEntity<ErrorResponse> handlerResourceInternalServerErrorException(Exception exception) {
 
-        String dateHour = ConvertDate.convertDateForDateHour(new Date());
+    //     String dateHour = ConvertDate.convertDateForDateHour(new Date());
 
-        ErrorResponse error = new ErrorResponse(dateHour, HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error",exception.getMessage());
+    //     ErrorResponse error = new ErrorResponse(dateHour, HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error",exception.getMessage());
 
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    //     return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    // }
     
 }
