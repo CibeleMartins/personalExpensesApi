@@ -100,7 +100,7 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         // seta o id e a data de inatiacao p/ o que ja estava no banco
         userModel.setId(id);
         userModel.setDataInativacao(userDto.getDataInativacao());
-
+        userModel.setDataCadastro(userDto.getDataCadastro());
         // salva no banco
         userModel = userRepository.save(userModel);
 
