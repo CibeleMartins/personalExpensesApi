@@ -33,13 +33,18 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         // apenas seta a data de inativacao
         // e atualiza esse usuário no banco
 
-        UserResponseDTO userRespDto = getById(id);
+       Optional<UserAdmin> userOptModel = userRepository.findById(id);
 
-        UserAdmin userModelUpdatedInative = mapper.map(userRespDto, UserAdmin.class);
 
-        userModelUpdatedInative.setDataInativacao(new Date());
+       if (userOptModel.isEmpty()) {
+        throw new ResourceNotFoundException("Não foi possível encontrar o usuário com o id: " + id);
+        }
 
-        userRepository.save(userModelUpdatedInative);
+        UserAdmin userModel = userOptModel.get();
+
+        userModel.setDataInativacao(new Date());
+
+        userRepository.save(userModel);
     }
 
     @Override
@@ -70,8 +75,10 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
     @Override
     public UserResponseDTO register(UserRequestDTO dto) {
 
-        UserAdmin userModel = mapper.map(dto, UserAdmin.class);
+        // UserAdmin userModel = mapper.map(dto, UserAdmin.class);
 
+        UserAdmin userModel = mapper.map(dto, UserAdmin.class);
+      
         userModel.setId(null);
         userModel.setDataCadastro(new Date());
         userModel = userRepository.save(userModel);

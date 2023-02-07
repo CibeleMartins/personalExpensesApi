@@ -22,8 +22,7 @@ public class RestExceptionHandler {
 
         String dateHour = ConvertDate.convertDateForDateHour(new Date());
 
-        ErrorResponse error = new ErrorResponse(dateHour, HttpStatus.NOT_FOUND.value(), "Not Found",
-                exception.getMessage());
+        ErrorResponse error = new ErrorResponse(dateHour, HttpStatus.NOT_FOUND.value(), "Not Found",exception.getMessage());
 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
@@ -33,8 +32,7 @@ public class RestExceptionHandler {
 
         String dateHour = ConvertDate.convertDateForDateHour(new Date());
 
-        ErrorResponse error = new ErrorResponse(dateHour, HttpStatus.BAD_REQUEST.value(), "Bad Request",
-                exception.getMessage());
+        ErrorResponse error = new ErrorResponse(dateHour, HttpStatus.BAD_REQUEST.value(), "Bad Request",exception.getMessage());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
@@ -44,8 +42,7 @@ public class RestExceptionHandler {
 
         String dateHour = ConvertDate.convertDateForDateHour(new Date());
 
-        ErrorResponse error = new ErrorResponse(dateHour, HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error",
-                exception.getMessage());
+        ErrorResponse error = new ErrorResponse(dateHour, HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Server Error",exception.getMessage());
 
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }

@@ -6,12 +6,14 @@ public class UserResponseDTO {
 
     private Long id;
 
-    private String name;
+    private String nome;
 
-    private String photo;
+    private String email;
+
+    private String foto;
 
     private Date dataCadastro;
-    
+
     private Date dataInativacao;
 
     public Long getId() {
@@ -22,28 +24,28 @@ public class UserResponseDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String nome) {
-        this.name = nome;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFoto() {
-        return photo;
+        return foto;
     }
 
     public void setFoto(String foto) {
-        this.photo = foto;
-    }
-
-    public Date getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
+        this.foto = foto;
     }
 
     public Date getDataInativacao() {
@@ -52,6 +54,14 @@ public class UserResponseDTO {
 
     public void setDataInativacao(Date dataInativacao) {
         this.dataInativacao = dataInativacao;
+    }
+    
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
 }

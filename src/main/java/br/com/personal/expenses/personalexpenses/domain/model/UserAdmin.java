@@ -14,33 +14,28 @@ public class UserAdmin {
     // com a utilizacao de userdetails nao tem como testar o cadastro e atualização de um usuário
     
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "idUser")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUsuario")
     private Long id;
 
-    @Column(nullable = false)
-    private String name;
+    private String nome;
 
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String senha;
 
     @Column(columnDefinition = "TEXT")
-    private String photo;
+    private String foto;
 
     @Column(nullable = false)
     private Date dataCadastro;
 
-    @Column(nullable = true)
     private Date dataInativacao;
 
-    // um (one) usuário pode ter muitos (to many) títulos
-    // no parametro, é definido a entidade que é "dona" do relacionamento
-    // @OneToMany(mappedBy = "user")
-    // private List<Title> titles;
-
+    // @OneToMany(mappedBy = "usuario")
+    // private List<Titulo> titulos;
 
     public Long getId() {
         return id;
@@ -50,12 +45,12 @@ public class UserAdmin {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String nome) {
-        this.name = nome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -65,21 +60,21 @@ public class UserAdmin {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getPasswordUser() {
-        return password;
-    }
     
-    public void setPasswordUser(String password) {
-        this.password = password;
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getFoto() {
-        return photo;
+        return foto;
     }
 
     public void setFoto(String foto) {
-        this.photo = foto;
+        this.foto = foto;
     }
 
     public Date getDataCadastro() {
@@ -98,57 +93,50 @@ public class UserAdmin {
         this.dataInativacao = dataInativacao;
     }
 
-    // public List<Title> getTitles() {
-    //     return titles;
+    // public List<Titulo> getTitulos() {
+    //     return titulos;
     // }
 
-    // public void setTitles(List<Title> titles) {
-    //     this.titles = titles;
+    // public void setTitulos(List<Titulo> titulos) {
+    //     this.titulos = titulos;
     // }
 
-
-    // métodos do UserDetails -> spring security
+    // //#region Framework
     // @Override
     // public Collection<? extends GrantedAuthority> getAuthorities() {
-    //     //   autorizações específicas
     //     return null;
     // }
 
     // @Override
     // public String getPassword() {
-    //     // quando o framework tentar pegar o password do usuário
-    //     return password;
+    //     return senha;
     // }
 
     // @Override
     // public String getUsername() {
-    //     // o que será usado como nome de usuário
     //     return email;
     // }
 
     // @Override
     // public boolean isAccountNonExpired() {
-    //     // a conta vai ter expiração?
     //     return true;
     // }
 
     // @Override
     // public boolean isAccountNonLocked() {
-       
     //     return true;
     // }
 
     // @Override
     // public boolean isCredentialsNonExpired() {
-    //     // se a credencial não expira
     //     return true;
     // }
 
     // @Override
     // public boolean isEnabled() {
-    //     //    se a conta está ativa
     //     return true;
     // }
+
 
    
 }

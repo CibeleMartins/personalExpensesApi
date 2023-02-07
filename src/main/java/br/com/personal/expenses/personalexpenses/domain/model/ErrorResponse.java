@@ -8,12 +8,12 @@ public class ErrorResponse {
 
     private String title;
 
-    private String mensagem;
+    private String message;
 
-    public ErrorResponse(String dateHour, Integer status, String title, String mensagem) {
+    public ErrorResponse(String dateHour, Integer status, String title, String message) {
         this.dateHour = dateHour;
         this.status = status;
         this.title = title;
-        this.mensagem = mensagem;
+        this.message = message;
     }
 }

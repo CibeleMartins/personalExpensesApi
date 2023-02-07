@@ -1,27 +1,21 @@
 package br.com.personal.expenses.personalexpenses.dto.User;
 
-import java.util.Date;
-
 public class UserRequestDTO {
  
-    private String name;
+    private String nome;
 
-  
     private String email;
 
-    
-    private String password;
+    private String senha;
 
-
-    private String photo;
-
+    private String foto;
 
     public String getNome() {
-        return name;
+        return nome;
     }
 
     public void setNome(String nome) {
-        this.name = nome;
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -32,21 +26,21 @@ public class UserRequestDTO {
         this.email = email;
     }
 
-    public String getPasswordUser() {
-        return password;
+    public String getSenha() {
+        return senha;
     }
-    
-    public void setPasswordUser(String password) {
-        this.password = password;
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getFoto() {
-        return photo;
+        return foto;
     }
 
     public void setFoto(String foto) {
-        this.photo = foto;
-    }
+        this.foto = foto;
+    }    
 
 
 }
