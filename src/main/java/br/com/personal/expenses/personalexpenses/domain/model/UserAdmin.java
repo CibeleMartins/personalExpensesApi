@@ -7,11 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
 
 @Entity
-@Table(name = "user_admin")
-public class User {
+public class UserAdmin {
     // com a utilizacao de userdetails nao tem como testar o cadastro e atualização de um usuário
     
     @Id
@@ -31,10 +30,10 @@ public class User {
     @Column(columnDefinition = "TEXT")
     private String photo;
 
-
     @Column(nullable = false)
     private Date dataCadastro;
-    
+
+    @Column(nullable = true)
     private Date dataInativacao;
 
     // um (one) usuário pode ter muitos (to many) títulos
@@ -51,11 +50,11 @@ public class User {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public void setNome(String nome) {
+    public void setName(String nome) {
         this.name = nome;
     }
 

@@ -1,10 +1,6 @@
 package br.com.personal.expenses.personalexpenses.dto.User;
 
 import java.util.Date;
-import java.util.List;
-
-import br.com.personal.expenses.personalexpenses.domain.model.Title;
-import jakarta.persistence.OneToMany;
 
 public class UserResponseDTO {
 
@@ -26,11 +22,11 @@ public class UserResponseDTO {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public void setNome(String nome) {
+    public void setName(String nome) {
         this.name = nome;
     }
 

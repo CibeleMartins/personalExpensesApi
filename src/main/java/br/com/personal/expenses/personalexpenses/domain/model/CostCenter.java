@@ -29,7 +29,7 @@ public class CostCenter {
     // por isso o id do usuário
     @ManyToOne
     @JoinColumn(name = "idUser")
-    private User user;
+    private UserAdmin user;
 
     // muitos centros de custo podem estar em muitos titulos
     // a tabela que cria/ "é dona" do relacionamento é a center_cost
@@ -63,12 +63,12 @@ public class CostCenter {
         this.observation = observation;
     }
 
-    public User getUser() {
+    public UserAdmin getUser() {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserAdmin userAdmin) {
+        this.user = userAdmin;
     }
 
     // public List<Title> getTitles() {

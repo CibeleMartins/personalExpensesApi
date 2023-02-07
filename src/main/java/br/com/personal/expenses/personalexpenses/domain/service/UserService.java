@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.personal.expenses.personalexpenses.domain.exception.ResourceNotFoundException;
-import br.com.personal.expenses.personalexpenses.domain.model.User;
+import br.com.personal.expenses.personalexpenses.domain.model.UserAdmin;
 import br.com.personal.expenses.personalexpenses.domain.repository.UserRepository;
 import br.com.personal.expenses.personalexpenses.dto.User.UserRequestDTO;
 import br.com.personal.expenses.personalexpenses.dto.User.UserResponseDTO;
 
+// é necessário a anotação pq o serviço nao estende a interface, ele implementa
 @Service
 public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO> {
 
@@ -34,7 +35,7 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
 
         UserResponseDTO userRespDto = getById(id);
 
-        User userModelUpdatedInative = mapper.map(userRespDto, User.class);
+        UserAdmin userModelUpdatedInative = mapper.map(userRespDto, UserAdmin.class);
 
         userModelUpdatedInative.setDataInativacao(new Date());
 
@@ -45,10 +46,9 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
     public List<UserResponseDTO> getAll() {
 
         // pega os usuários do BD
-        List<User> usersModel = userRepository.findAll();
+        List<UserAdmin> usersModel = userRepository.findAll();
 
-        List<UserResponseDTO> usersDto = usersModel.stream().map(u -> mapper.map(u, UserResponseDTO.class))
-                .collect(Collectors.toList());
+        List<UserResponseDTO> usersDto = usersModel.stream().map(u -> mapper.map(u, UserResponseDTO.class)).collect(Collectors.toList());
 
         return usersDto;
     }
@@ -56,7 +56,7 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
     @Override
     public UserResponseDTO getById(Long id) {
 
-        Optional<User> optionalUserModel = userRepository.findById(id);
+        Optional<UserAdmin> optionalUserModel = userRepository.findById(id);
 
         if (optionalUserModel.isEmpty()) {
             throw new ResourceNotFoundException("Usuário não encontrado.");
@@ -70,10 +70,10 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
     @Override
     public UserResponseDTO register(UserRequestDTO dto) {
 
-        User userModel = mapper.map(dto, User.class);
+        UserAdmin userModel = mapper.map(dto, UserAdmin.class);
 
         userModel.setId(null);
-
+        userModel.setDataCadastro(new Date());
         userModel = userRepository.save(userModel);
 
         UserResponseDTO userResponse = mapper.map(userModel, UserResponseDTO.class);
@@ -88,7 +88,7 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         UserResponseDTO userDto = getById(id);
 
         // transforma o usuario request em model
-        User userModel = mapper.map(dto, User.class);
+        UserAdmin userModel = mapper.map(dto, UserAdmin.class);
 
         // seta o id e a data de inatiacao p/ o que ja estava no banco
         userModel.setId(id);

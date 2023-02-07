@@ -21,7 +21,7 @@ import br.com.personal.expenses.personalexpenses.dto.User.UserResponseDTO;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/users_admin")
+@RequestMapping("/api/users")
 public class UserController {
     
     @Autowired
