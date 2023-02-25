@@ -1,6 +1,7 @@
 package br.com.personal.expenses.personalexpenses.security;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
+import br.com.personal.expenses.personalexpenses.common.ConvertDate;
+import br.com.personal.expenses.personalexpenses.domain.model.ErrorResponse;
 import br.com.personal.expenses.personalexpenses.domain.model.UserAdmin;
 import br.com.personal.expenses.personalexpenses.dto.User.UserLoginRequestDTO;
 import br.com.personal.expenses.personalexpenses.dto.User.UserLoginResponseDTO;
 import br.com.personal.expenses.personalexpenses.dto.User.UserResponseDTO;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -101,4 +105,22 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.getWriter().write(new Gson().toJson(userLoginResponse));
 
     }
+
+    // se algo der errado chegará nesse método
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,AuthenticationException failed) throws IOException, ServletException  {
+        // as exceções aqui não chegam no handler que foi criado, não é possível utilizar exceções escutada pelo handler
+        // porque essas exceções aqui acontecem antes do usuário chegar na aplicação
+
+        String dateHour = ConvertDate.convertDateForDateHour(new Date());
+
+        ErrorResponse error = new ErrorResponse(dateHour, 401, "Unauthorized",failed.getMessage());
+
+        response.setStatus(401);
+
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json");
+        response.getWriter().write(new Gson().toJson(error));
+    }
+
 }
