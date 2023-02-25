@@ -42,7 +42,7 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
 
         UserAdmin userModel = userOptModel.get();
 
-        userModel.setDataInativacao(new Date());
+        userModel.setDateInativation(new Date());
 
         userRepository.save(userModel);
     }
@@ -80,7 +80,7 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         UserAdmin userModel = mapper.map(dto, UserAdmin.class);
       
         userModel.setId(null);
-        userModel.setDataCadastro(new Date());
+        userModel.setDateRegister(new Date());
         userModel = userRepository.save(userModel);
 
         UserResponseDTO userResponse = mapper.map(userModel, UserResponseDTO.class);
@@ -99,8 +99,8 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
 
         // seta o id e a data de inatiacao p/ o que ja estava no banco
         userModel.setId(id);
-        userModel.setDataInativacao(userDto.getDataInativacao());
-        userModel.setDataCadastro(userDto.getDataCadastro());
+        userModel.setDateInativation(userDto.getDateInativation());
+        userModel.setDateRegister(userDto.getDateRegister());
         // salva no banco
         userModel = userRepository.save(userModel);
 
