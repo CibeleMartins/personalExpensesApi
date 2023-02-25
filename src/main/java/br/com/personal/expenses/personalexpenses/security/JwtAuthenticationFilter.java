@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private ModelMapper mapper;
 
     // esses atributos vão ser recebidos no construtor dessa classe
-    public  JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         // chama os métodos da classe pai
         super();
         // constrói a propriedades de acordo com os parâmetros recebidos

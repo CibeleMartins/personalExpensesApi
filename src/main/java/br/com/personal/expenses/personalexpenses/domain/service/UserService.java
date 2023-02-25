@@ -72,6 +72,19 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         return userResponseDto;
     }
 
+    public UserResponseDTO getByEmail(String email) {
+
+        Optional<UserAdmin> optionalUserModel = userRepository.findByEmail(email);
+
+        if (optionalUserModel.isEmpty()) {
+            throw new ResourceNotFoundException("Usuário com email" + email +  "não encontrado.");
+        }
+
+        UserResponseDTO userResponseDto = mapper.map(optionalUserModel.get(), UserResponseDTO.class);
+
+        return userResponseDto;
+    }
+
     @Override
     public UserResponseDTO register(UserRequestDTO dto) {
 
