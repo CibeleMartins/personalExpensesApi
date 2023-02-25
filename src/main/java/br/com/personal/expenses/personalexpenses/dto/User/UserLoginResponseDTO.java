@@ -1,6 +1,6 @@
 package br.com.personal.expenses.personalexpenses.dto.User;
 
-public class UserLoginResponse {
+public class UserLoginResponseDTO {
     
     private String tokenAuthorization;
 

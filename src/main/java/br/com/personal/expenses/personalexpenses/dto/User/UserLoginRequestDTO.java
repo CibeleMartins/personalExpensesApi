@@ -1,6 +1,6 @@
 package br.com.personal.expenses.personalexpenses.dto.User;
 
-public class UserLoginRequest {
+public class UserLoginRequestDTO {
     
     private String email;
 
