@@ -1,4 +1,4 @@
-package br.com.personal.expenses.security;
+package br.com.personal.expenses.personalexpenses.security;
 
 import java.security.Key;
 import java.util.Date;
@@ -114,6 +114,7 @@ public class JwtUtil {
         return claims.getSubject();
     }
 
+    // método para validar o token
     public boolean isValidToken(String token) {
         Claims claims = getClaims(token);
 
