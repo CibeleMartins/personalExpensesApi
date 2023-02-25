@@ -2,20 +2,20 @@ package br.com.personal.expenses.personalexpenses.dto.User;
 
 public class UserRequestDTO {
  
-    private String nome;
+    private String nameUser;
 
     private String email;
 
-    private String senha;
+    private String passwordUser;
 
-    private String foto;
+    private String photo;
 
-    public String getNome() {
-        return nome;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
     public String getEmail() {
@@ -26,20 +26,20 @@ public class UserRequestDTO {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPasswordUser() {
+        return passwordUser;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
     }
 
-    public String getFoto() {
-        return foto;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }    
 
 

@@ -1,12 +1,19 @@
 package br.com.personal.expenses.personalexpenses.domain.model;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+
+import br.com.personal.expenses.personalexpenses.domain.model.Title;
 
 
 @Entity
@@ -18,24 +25,24 @@ public class UserAdmin implements UserDetails {
     @Column(name = "idUsuario")
     private Long id;
 
-    private String nome;
+    private String nameUser;
 
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private String senha;
+    private String passwordUser;
 
     @Column(columnDefinition = "TEXT")
-    private String foto;
+    private String photo;
 
     @Column(nullable = false)
-    private Date dataCadastro;
+    private Date dateRegister;
 
-    private Date dataInativacao;
+    private Date dateInativation;
 
     // @OneToMany(mappedBy = "usuario")
-    // private List<Titulo> titulos;
+    // private List<Title> Titles;
 
     public Long getId() {
         return id;
@@ -45,12 +52,12 @@ public class UserAdmin implements UserDetails {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
     public String getEmail() {
@@ -61,81 +68,81 @@ public class UserAdmin implements UserDetails {
         this.email = email;
     }
     
-    public String getSenha() {
-        return senha;
+    public String getPasswordUser() {
+        return passwordUser;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
     }
 
-    public String getFoto() {
-        return foto;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public Date getDataCadastro() {
-        return dataCadastro;
+    public Date getDateRegister() {
+        return dateRegister;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setDateRegister(Date dateRegister) {
+        this.dateRegister = dateRegister;
     }
 
-    public Date getDataInativacao() {
-        return dataInativacao;
+    public Date getDateInativation() {
+        return dateInativation;
     }
 
-    public void setDataInativacao(Date dataInativacao) {
-        this.dataInativacao = dataInativacao;
+    public void setDateInativation(Date dateInativation) {
+        this.dateInativation = dateInativation;
     }
 
-    // public List<Titulo> getTitulos() {
-    //     return titulos;
+    // public List<Title> getTitles() {
+    //     return Titles;
     // }
 
-    // public void setTitulos(List<Titulo> titulos) {
-    //     this.titulos = titulos;
+    // public void setTitles(List<Title> Titles) {
+    //     this.Titles = Titles;
     // }
 
-    // //#region Framework
-    // @Override
-    // public Collection<? extends GrantedAuthority> getAuthorities() {
-    //     return null;
-    // }
+    //#region Framework
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
-    // @Override
-    // public String getPassword() {
-    //     return senha;
-    // }
+    @Override
+    public String getPassword() {
+        return passwordUser;
+    }
 
-    // @Override
-    // public String getUsername() {
-    //     return email;
-    // }
+    @Override
+    public String getUsername() {
+        return email;
+    }
 
-    // @Override
-    // public boolean isAccountNonExpired() {
-    //     return true;
-    // }
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-    // @Override
-    // public boolean isAccountNonLocked() {
-    //     return true;
-    // }
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-    // @Override
-    // public boolean isCredentialsNonExpired() {
-    //     return true;
-    // }
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-    // @Override
-    // public boolean isEnabled() {
-    //     return true;
-    // }
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 
    
