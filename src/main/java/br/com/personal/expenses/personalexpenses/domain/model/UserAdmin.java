@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 
 
 @Entity
-public class UserAdmin {
+public class UserAdmin implements UserDetails {
     // com a utilizacao de userdetails nao tem como testar o cadastro e atualização de um usuário
     
     @Id
