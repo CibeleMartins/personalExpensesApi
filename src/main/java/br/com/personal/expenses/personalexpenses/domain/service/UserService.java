@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.personal.expenses.personalexpenses.domain.exception.ResourceNotFoundException;
@@ -24,6 +25,9 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
 
     @Autowired
     private ModelMapper mapper;
+
+    @Autowired //criptografar senha do usuário
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void deleteById(Long id) {
@@ -91,7 +95,11 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         // UserAdmin userModel = mapper.map(dto, UserAdmin.class);
 
         UserAdmin userModel = mapper.map(dto, UserAdmin.class);
-      
+
+        // criptografa a senha do usuário
+        String passwordUser = passwordEncoder.encode(userModel.getPasswordUser());
+
+        userModel.setPasswordUser(passwordUser);
         userModel.setId(null);
         userModel.setDateRegister(new Date());
         userModel = userRepository.save(userModel);
@@ -107,9 +115,13 @@ public class UserService implements CRUDService<UserRequestDTO, UserResponseDTO>
         // obtem o usuário pelo id
         UserResponseDTO userDto = getById(id);
 
+         // criptografa a senha do usuário
+        String passwordUser = passwordEncoder.encode(dto.getPasswordUser());
+
         // transforma o usuario request em model
         UserAdmin userModel = mapper.map(dto, UserAdmin.class);
 
+        userModel.setPasswordUser(passwordUser);
         // seta o id e a data de inatiacao p/ o que ja estava no banco
         userModel.setId(id);
         userModel.setDateInativation(userDto.getDateInativation());

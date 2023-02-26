@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.intercept.AuthorizationFilter;
+
 
 @Configuration
 @EnableWebSecurity //diz que é um config de segurança web
@@ -23,6 +23,8 @@ public class WebSecurityConfig {
     @Autowired
     private AuthenticationConfiguration authConfiguration;
 
+    
+
     @Bean //p poder usar em qualquer lugar
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -31,7 +33,7 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfiguration) throws Exception {
         // quando for solicitado uma config de authnetication manager com base no authentication configuration será retornado
-        return new AuthenticationConfiguration().getAuthenticationManager();
+        return authConfiguration.getAuthenticationManager();
     }
 
     @Bean
