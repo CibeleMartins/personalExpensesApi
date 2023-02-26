@@ -35,9 +35,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private JwtUtil jwtUtil;
 
-    @Autowired
-    private ModelMapper mapper;
-
     // esses atributos vão ser recebidos no construtor dessa classe
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         // chama os métodos da classe pai
@@ -90,7 +87,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String token = jwtUtil.generateToken(authResult);
 
         // cria um usuário response com base no usuário autenticado
-        UserResponseDTO userResponse = mapper.map(user, UserResponseDTO.class);
+        UserResponseDTO userResponse = new UserResponseDTO();
+        userResponse.setId(user.getId());
+        userResponse.setEmail(user.getEmail());
+        userResponse.setNameUser(user.getNameUser());
+        userResponse.setPhoto(user.getPhoto());
+        userResponse.setDateInativation(user.getDateInativation());
+        userResponse.setDateRegister(user.getDateRegister());
+    
 
         // cria um usuário login response com o token e as infos do usuário response dto
         UserLoginResponseDTO userLoginResponse = new UserLoginResponseDTO();
