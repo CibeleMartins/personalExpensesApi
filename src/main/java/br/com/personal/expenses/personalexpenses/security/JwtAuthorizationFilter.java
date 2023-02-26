@@ -21,17 +21,14 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private JwtUtil jwtUtil;
 
-    // obter o usuário pelo login
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private ModelMapper mapper;
+    private UserDetailsSecurityServer userDetails;
 
     // construtor
-    public JwtAuthorizationFilter(AuthenticationManager authManager, JwtUtil jwtUtil) {
+    public JwtAuthorizationFilter(AuthenticationManager authManager, JwtUtil jwtUtil, UserDetailsSecurityServer userDetails ) {
         super(authManager);
         this.jwtUtil = jwtUtil;
+        this.userDetails = userDetails;
     }
 
     @Override
@@ -55,12 +52,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         if (jwtUtil.isValidToken(token)) {
             String userEmail = jwtUtil.getUserName(token);
-            UserResponseDTO user = userService.getByEmail(userEmail);
+            
+            UserAdmin userModelRepository = (UserAdmin) userDetails.loadUserByUsername(userEmail);
 
-            UserAdmin userAuthenticatedCredentials = mapper.map(user, UserAdmin.class);
-
-            return new UsernamePasswordAuthenticationToken(userAuthenticatedCredentials, null,
-                    userAuthenticatedCredentials.getAuthorities());
+            return new UsernamePasswordAuthenticationToken(userModelRepository, null,userModelRepository.getAuthorities());
 
         }
 
