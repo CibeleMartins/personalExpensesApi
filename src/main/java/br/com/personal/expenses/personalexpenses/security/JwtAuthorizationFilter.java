@@ -2,7 +2,6 @@ package br.com.personal.expenses.personalexpenses.security;
 
 import java.io.IOException;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,8 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import br.com.personal.expenses.personalexpenses.domain.model.UserAdmin;
-import br.com.personal.expenses.personalexpenses.domain.service.UserService;
-import br.com.personal.expenses.personalexpenses.dto.User.UserResponseDTO;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +18,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private JwtUtil jwtUtil;
 
-    @Autowired
     private UserDetailsSecurityServer userDetails;
 
     // construtor

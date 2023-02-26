@@ -23,7 +23,8 @@ public class WebSecurityConfig {
     @Autowired
     private AuthenticationConfiguration authConfiguration;
 
-    
+    @Autowired
+    private UserDetailsSecurityServer userDetails;
 
     @Bean //p poder usar em qualquer lugar
     public BCryptPasswordEncoder passwordEncoder() {
@@ -45,7 +46,7 @@ public class WebSecurityConfig {
         // qualquer outra requisição que não seja POST vai precisar estar autenticado para conseguir fazer
         
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(authConfiguration), jwtUtil));
-        http.addFilter(new JwtAuthorizationFilter(authenticationManager(authConfiguration), jwtUtil));
+        http.addFilter(new JwtAuthorizationFilter(authenticationManager(authConfiguration), jwtUtil, userDetails));
 
         return http.build();
     }
