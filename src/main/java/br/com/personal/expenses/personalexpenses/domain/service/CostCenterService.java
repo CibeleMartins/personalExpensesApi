@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import br.com.personal.expenses.personalexpenses.domain.exception.ResourceNotFoundException;
 import br.com.personal.expenses.personalexpenses.domain.model.CostCenter;
+import br.com.personal.expenses.personalexpenses.domain.model.UserAdmin;
 import br.com.personal.expenses.personalexpenses.domain.repository.CostCenterRepository;
 import br.com.personal.expenses.personalexpenses.dto.CostCenter.CostCenterRequestDTO;
 import br.com.personal.expenses.personalexpenses.dto.CostCenter.CostCenterResponseDTO;
@@ -16,7 +18,7 @@ import br.com.personal.expenses.personalexpenses.dto.CostCenter.CostCenterRespon
 public class CostCenterService implements CRUDService<CostCenterRequestDTO, CostCenterResponseDTO> {
     
     @Autowired
-    private CostCenterService costCenterService;
+    private CostCenterRepository costCenterRepository;
 
     @Autowired
     private ModelMapper mapper;
@@ -35,7 +37,7 @@ public class CostCenterService implements CRUDService<CostCenterRequestDTO, Cost
         Optional<CostCenter> costCenterModelRepository = costCenterRepository.findById(id);
 
         if(costCenterModelRepository.isEmpty()) {
-            throw new ResourceNotFoundException("Usuário não encontrado.");
+            throw new ResourceNotFoundException("Centro de custo não encontrado.");
         }
 
         return mapper.map(costCenterModelRepository.get(), CostCenterResponseDTO.class);
@@ -44,9 +46,13 @@ public class CostCenterService implements CRUDService<CostCenterRequestDTO, Cost
     @Override
     public CostCenterResponseDTO register(CostCenterRequestDTO dto) {
 
-        dto.setId(null);
-
         CostCenter costCenterModel = mapper.map(dto, CostCenter.class);
+
+        // quem é o usuário que faz essa requisição
+        UserAdmin user = (UserAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        // define que o usuário que criou o centro de custo foi o usuário que fez a requisição
+        costCenterModel.setUser(user);
 
         costCenterModel.setId(null);
 
@@ -57,14 +63,25 @@ public class CostCenterService implements CRUDService<CostCenterRequestDTO, Cost
 
     @Override
     public CostCenterResponseDTO updateById(Long id, CostCenterRequestDTO dto) {
+
+        getById(id);
+        CostCenter costCenterModel = mapper.map(dto, CostCenter.class);
+
+        UserAdmin user = (UserAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        costCenterModel.setUser(user);
+
+        costCenterModel.setId(id);
+        costCenterModel = costCenterRepository.save(costCenterModel);
       
-        return null;
+        return mapper.map(costCenterModel, CostCenterResponseDTO.class);
     }
 
     @Override
     public void deleteById(Long id) {
         
+        getById(id);
+        costCenterRepository.deleteById(id);
     }
 
-    private CostCenterRepository costCenterRepository;
+    
 }
