@@ -1,56 +1,26 @@
-package br.com.personal.expenses.personalexpenses.domain.model;
+package br.com.personal.expenses.personalexpenses.dto.Title;
 
 import java.util.Date;
 import java.util.List;
 
 import br.com.personal.expenses.personalexpenses.domain.Enum.EnumTypeTitle;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import br.com.personal.expenses.personalexpenses.dto.CostCenter.CostCenterRequestDTO;
 
-@Entity
-public class Title {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_title")
+public class TitleRequestDTO {
+
     private Long id;
 
-    @Column(nullable = false)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "idUser")
-    private UserAdmin user;
-
     private EnumTypeTitle type;
-
-    @ManyToMany
-    @JoinTable(
-        name = "titulo_centrodecusto",
-        joinColumns = @JoinColumn(name = "id_title"),
-        inverseJoinColumns = @JoinColumn(name = "id_cost_center")
-    )
-    private List<CostCenter> costCenter;
-    @Column(nullable = false)
+   
+    private List<CostCenterRequestDTO> costCenter;
+ 
     private Double value;
 
     private Date dateRegister;
 
     private Date dateReference;
-
-    private Date dateDue;
-
-    private Date datePayment;
-
-    @Column(columnDefinition = "TEXT")
-    private String observation;
 
     public Long getId() {
         return id;
@@ -68,14 +38,6 @@ public class Title {
         this.description = description;
     }
 
-    public UserAdmin getUser() {
-        return user;
-    }
-
-    public void setUser(UserAdmin user) {
-        this.user = user;
-    }
-
     public EnumTypeTitle getType() {
         return type;
     }
@@ -84,11 +46,11 @@ public class Title {
         this.type = type;
     }
 
-    public List<CostCenter> getCostCenter() {
+    public List<CostCenterRequestDTO> getCostCenter() {
         return costCenter;
     }
 
-    public void setCostCenter(List<CostCenter> costCenter) {
+    public void setCostCenter(List<CostCenterRequestDTO> costCenter) {
         this.costCenter = costCenter;
     }
 
@@ -140,5 +102,10 @@ public class Title {
         this.observation = observation;
     }
 
+    private Date dateDue;
+
+    private Date datePayment;
+
+    private String observation;
 
 }
