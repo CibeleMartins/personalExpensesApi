@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import br.com.personal.expenses.personalexpenses.domain.exception.ResourceBadRequestException;
 import br.com.personal.expenses.personalexpenses.domain.exception.ResourceNotFoundException;
 import br.com.personal.expenses.personalexpenses.domain.model.Title;
 import br.com.personal.expenses.personalexpenses.domain.model.UserAdmin;
@@ -46,6 +47,8 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
 
     @Override
     public TitleResponseDTO register(TitleRequestDTO dto) {
+
+        validateTitle(dto);
         Title titleModel = mapper.map(dto, Title.class);
 
         // quem é o usuário que faz essa requisição
@@ -64,6 +67,7 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
     @Override
     public TitleResponseDTO updateById(Long id, TitleRequestDTO dto) {
         getById(id);
+        validateTitle(dto);
         Title titleModel = mapper.map(dto, Title.class);
 
         UserAdmin user = (UserAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -81,4 +85,11 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
         titleRepository.deleteById(id);
     }
     
+
+    private void validateTitle(TitleRequestDTO titleDto) {
+        
+        if(titleDto.getType() == null || titleDto.getDateDue() == null || titleDto.getValue() == null || titleDto.getDescription() == null) {
+            throw new ResourceBadRequestException("os campos Tipo, Data de Vencimento, Valor e Descrição são obrigatórios.");
+        }
+    }
 }
