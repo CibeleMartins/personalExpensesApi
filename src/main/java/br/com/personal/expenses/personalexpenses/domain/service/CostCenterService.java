@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import br.com.personal.expenses.personalexpenses.domain.exception.ResourceNotFoundException;
 import br.com.personal.expenses.personalexpenses.domain.model.CostCenter;
@@ -15,6 +16,7 @@ import br.com.personal.expenses.personalexpenses.domain.repository.CostCenterRep
 import br.com.personal.expenses.personalexpenses.dto.CostCenter.CostCenterRequestDTO;
 import br.com.personal.expenses.personalexpenses.dto.CostCenter.CostCenterResponseDTO;
 
+@Service
 public class CostCenterService implements CRUDService<CostCenterRequestDTO, CostCenterResponseDTO> {
     
     @Autowired
