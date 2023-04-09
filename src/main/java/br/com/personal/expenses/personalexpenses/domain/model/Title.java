@@ -33,11 +33,12 @@ public class Title {
 
     @ManyToMany
     @JoinTable(
-        name = "titulo_centrodecusto",
+        name = "title_cost_center",
         joinColumns = @JoinColumn(name = "id_title"),
         inverseJoinColumns = @JoinColumn(name = "id_cost_center")
     )
     private List<CostCenter> costCenter;
+    
     @Column(nullable = false)
     private Double value;
 

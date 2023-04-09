@@ -23,6 +23,7 @@ import br.com.personal.expenses.personalexpenses.dto.Title.TitleResponseDTO;
 @RestController
 @RequestMapping("/api/titles")
 public class TitleController {
+
     @Autowired
     private TitleService titleService;
 
@@ -39,9 +40,9 @@ public class TitleController {
     }
 
     @PostMapping
-    public ResponseEntity<TitleResponseDTO> register(@RequestBody TitleRequestDTO Title) {
-
-        return new ResponseEntity<>(titleService.register(Title), HttpStatus.CREATED);
+    public ResponseEntity<TitleResponseDTO> register(@RequestBody TitleRequestDTO title) {
+        TitleResponseDTO titleResponse = titleService.register(title);
+        return new ResponseEntity<>(titleResponse, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

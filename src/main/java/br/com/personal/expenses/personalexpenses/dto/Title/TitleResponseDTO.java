@@ -12,6 +12,20 @@ public class TitleResponseDTO {
     private String description;
 
     private EnumTypeTitle type;
+
+    private List<CostCenterResponseDTO> costCenter;
+ 
+    private Double value;
+
+    private Date dateRegister;
+
+    private Date dateReference;
+
+    private Date dateDue;
+
+    private Date datePayment;
+
+    private String observation;
    
     public Long getId() {
         return id;
@@ -92,19 +106,5 @@ public class TitleResponseDTO {
     public void setObservation(String observation) {
         this.observation = observation;
     }
-
-    private List<CostCenterResponseDTO> costCenter;
- 
-    private Double value;
-
-    private Date dateRegister;
-
-    private Date dateReference;
-
-    private Date dateDue;
-
-    private Date datePayment;
-
-    private String observation;
 
 }

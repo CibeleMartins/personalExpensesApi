@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
-@EnableWebSecurity //diz que é um config de segurança web
+@EnableWebSecurity //diz que é uma config de segurança web
 public class WebSecurityConfig {
     
     @Autowired
@@ -43,6 +43,7 @@ public class WebSecurityConfig {
         http.headers().frameOptions()
         .disable().and().cors().and()
         .csrf().disable().authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST, "/api/users").permitAll().anyRequest().authenticated()).sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         // qualquer outra requisição que não seja POST vai precisar estar autenticado para conseguir fazer
         
         http.addFilter(new JwtAuthenticationFilter(authenticationManager(authConfiguration), jwtUtil));

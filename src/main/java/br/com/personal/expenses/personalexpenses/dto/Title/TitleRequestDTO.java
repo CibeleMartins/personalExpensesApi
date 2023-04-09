@@ -18,9 +18,13 @@ public class TitleRequestDTO {
  
     private Double value;
 
-    private Date dateRegister;
-
     private Date dateReference;
+
+    private Date dateDue;
+
+    private Date datePayment;
+
+    private String observation;
 
     public Long getId() {
         return id;
@@ -62,13 +66,6 @@ public class TitleRequestDTO {
         this.value = value;
     }
 
-    public Date getDateRegister() {
-        return dateRegister;
-    }
-
-    public void setDateRegister(Date dateRegister) {
-        this.dateRegister = dateRegister;
-    }
 
     public Date getDateReference() {
         return dateReference;
@@ -102,10 +99,6 @@ public class TitleRequestDTO {
         this.observation = observation;
     }
 
-    private Date dateDue;
 
-    private Date datePayment;
-
-    private String observation;
 
 }

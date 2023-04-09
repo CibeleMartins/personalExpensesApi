@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import br.com.personal.expenses.personalexpenses.domain.exception.ResourceBadRequestException;
 import br.com.personal.expenses.personalexpenses.domain.exception.ResourceNotFoundException;
@@ -16,6 +17,7 @@ import br.com.personal.expenses.personalexpenses.domain.repository.TitleReposito
 import br.com.personal.expenses.personalexpenses.dto.Title.TitleRequestDTO;
 import br.com.personal.expenses.personalexpenses.dto.Title.TitleResponseDTO;
 
+@Service
 public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseDTO> {
 
     @Autowired
@@ -88,7 +90,7 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
 
     private void validateTitle(TitleRequestDTO titleDto) {
         
-        if(titleDto.getType() == null || titleDto.getDateDue() == null || titleDto.getValue() == null || titleDto.getDescription() == null) {
+        if( titleDto.getDateDue() == null || titleDto.getValue() == null || titleDto.getDescription() == null) {
             throw new ResourceBadRequestException("os campos Tipo, Data de Vencimento, Valor e Descrição são obrigatórios.");
         }
     }

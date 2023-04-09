@@ -1,11 +1,16 @@
 package br.com.personal.expenses.personalexpenses.domain.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -35,7 +40,7 @@ public class CostCenter {
     // a tabela que cria/ "é dona" do relacionamento é a center_cost
     // a segunda anotação define que, ao buscar o centros de custos, irá retornar apenas os centros de custo e não os títulos
     // ex: busco o centro de custo e os titulos, entro no titulo, pego ocentro de custo -> loop infinito
-    // @ManyToMany(mappedBy = "cost_center")
+    // @ManyToMany(mappedBy = "id_cost_center")
     // @JsonBackReference
     // private List<Title> titles;
 
