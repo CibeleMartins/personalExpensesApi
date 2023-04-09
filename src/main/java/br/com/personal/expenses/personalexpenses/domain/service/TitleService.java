@@ -30,7 +30,9 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
     @Override
     public List<TitleResponseDTO> getAll() {
 
-        List<Title> titles = titleRepository.findAll();
+        UserAdmin user = (UserAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<Title> titles = titleRepository.findByUser(user);
 
         List<TitleResponseDTO> titlesResponse = titles.stream().map(t -> mapper.map(t, TitleResponseDTO.class)).collect(Collectors.toList());
 

@@ -30,17 +30,17 @@ public class DashboardService {
 
         for(TitleResponseDTO title : titles){
 
-            if(title.getType() == "A PAGAR") {
-                totalPay += title.getValue();
-                titlesPay.add(title);
-            }
-
             if(title.getType() == "A RECEBER") {
                 totalReceive += title.getValue();
                 titlesReceive.add(title);
+            } else {
+                totalPay += title.getValue();
+                titlesPay.add(title);
             }
         }
 
-        return new DashboardResponseDTO();
+        balance = totalReceive - totalPay;
+
+        return new DashboardResponseDTO(totalPay, totalReceive, balance, titlesPay, titlesReceive);
     }
 }

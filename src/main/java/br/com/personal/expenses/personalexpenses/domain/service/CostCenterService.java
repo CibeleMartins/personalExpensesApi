@@ -27,8 +27,10 @@ public class CostCenterService implements CRUDService<CostCenterRequestDTO, Cost
 
     @Override
     public List<CostCenterResponseDTO> getAll() {
+
+        UserAdmin user = (UserAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
        
-        List<CostCenter> costsCentersRepository = costCenterRepository.findAll();
+        List<CostCenter> costsCentersRepository = costCenterRepository.findByUser(user);
 
         return costsCentersRepository.stream().map(costCenter -> mapper.map(costCenter, CostCenterResponseDTO.class)).collect(Collectors.toList());
     }

@@ -20,8 +20,7 @@ public class DashboardResponseDTO {
     }
 
     // custom constructor
-    public DashboardResponseDTO(Double totalPay, Double totalReceive, Double balance, List<TitleResponseDTO> titlesPay,
-            List<TitleResponseDTO> titlesReceive) {
+    public DashboardResponseDTO(Double totalPay, Double totalReceive, Double balance, List<TitleResponseDTO> titlesPay, List<TitleResponseDTO> titlesReceive) {
         this.totalPay = totalPay;
         this.totalReceive = totalReceive;
         this.balance = balance;
