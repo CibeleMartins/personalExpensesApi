@@ -43,8 +43,9 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
     public TitleResponseDTO getById(Long id) {
         Optional<Title> titles = titleRepository.findById(id);
 
-        if(titles.isEmpty()) {
-            throw new ResourceNotFoundException("Centro de custo não encontrado.");
+        UserAdmin user = (UserAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(titles.isEmpty() || titles.get().getUser().getId() != user.getId()) {
+            throw new ResourceNotFoundException("Título desse usuário logado não encontrado.");
         }
 
         return mapper.map(titles.get(), TitleResponseDTO.class);

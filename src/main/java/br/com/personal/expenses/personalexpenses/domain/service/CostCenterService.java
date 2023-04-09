@@ -39,9 +39,9 @@ public class CostCenterService implements CRUDService<CostCenterRequestDTO, Cost
     public CostCenterResponseDTO getById(Long id) {
        
         Optional<CostCenter> costCenterModelRepository = costCenterRepository.findById(id);
-
-        if(costCenterModelRepository.isEmpty()) {
-            throw new ResourceNotFoundException("Centro de custo não encontrado.");
+        UserAdmin user = (UserAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(costCenterModelRepository.isEmpty() || costCenterModelRepository.get().getUser().getId() != user.getId()) {
+            throw new ResourceNotFoundException("Centro de custo desse usuário logado não encontrado.");
         }
 
         return mapper.map(costCenterModelRepository.get(), CostCenterResponseDTO.class);
