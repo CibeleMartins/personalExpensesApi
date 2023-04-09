@@ -57,8 +57,9 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
         UserAdmin user = (UserAdmin) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         // define que o usuário que criou o centro de custo foi o usuário que fez a requisição
+        // titleModel.setType(dto.getType());
         titleModel.setUser(user);
-
+    
         titleModel.setId(null);
 
         titleModel = titleRepository.save(titleModel);

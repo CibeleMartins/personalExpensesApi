@@ -1,8 +1,8 @@
 package br.com.personal.expenses.personalexpenses.domain.Enum;
 
 public enum EnumTypeTitle {
-    RECEIVABLE("ARECEBER"),
-    PAYABLE("APAGAR");
+    RECEIVABLE("R"),
+    PAYABLE("P");
 
     private String value;
 

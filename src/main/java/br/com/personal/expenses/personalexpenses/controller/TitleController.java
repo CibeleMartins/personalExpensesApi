@@ -43,7 +43,7 @@ public class TitleController {
     public ResponseEntity<TitleResponseDTO> register(@RequestBody TitleRequestDTO title) {
         TitleResponseDTO titleResponse = titleService.register(title);
         return new ResponseEntity<>(titleResponse, HttpStatus.CREATED);
-    }
+    } //SE VEM ALGUM CAMPO ERRADO DA 403
 
     @PutMapping("/{id}")
     public ResponseEntity<TitleResponseDTO> update(@PathVariable Long id ,@RequestBody TitleRequestDTO Title) {

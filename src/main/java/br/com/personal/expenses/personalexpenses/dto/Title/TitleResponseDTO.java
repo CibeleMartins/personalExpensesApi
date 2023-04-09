@@ -3,7 +3,6 @@ package br.com.personal.expenses.personalexpenses.dto.Title;
 import java.util.Date;
 import java.util.List;
 
-import br.com.personal.expenses.personalexpenses.domain.Enum.EnumTypeTitle;
 import br.com.personal.expenses.personalexpenses.dto.CostCenter.CostCenterResponseDTO;
 
 public class TitleResponseDTO {
@@ -11,7 +10,7 @@ public class TitleResponseDTO {
 
     private String description;
 
-    private EnumTypeTitle type;
+    private String type;
 
     private List<CostCenterResponseDTO> costCenter;
  
@@ -43,11 +42,11 @@ public class TitleResponseDTO {
         this.description = description;
     }
 
-    public EnumTypeTitle getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(EnumTypeTitle type) {
+    public void setType(String type) {
         this.type = type;
     }
 

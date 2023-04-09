@@ -29,7 +29,7 @@ public class Title {
     @JoinColumn(name = "idUser")
     private UserAdmin user;
 
-    private EnumTypeTitle type;
+    private String type;
 
     @ManyToMany
     @JoinTable(
@@ -37,6 +37,7 @@ public class Title {
         joinColumns = @JoinColumn(name = "id_title"),
         inverseJoinColumns = @JoinColumn(name = "id_cost_center")
     )
+    
     private List<CostCenter> costCenter;
     
     @Column(nullable = false)
@@ -77,11 +78,11 @@ public class Title {
         this.user = user;
     }
 
-    public EnumTypeTitle getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(EnumTypeTitle type) {
+    public void setType(String type) {
         this.type = type;
     }
 
