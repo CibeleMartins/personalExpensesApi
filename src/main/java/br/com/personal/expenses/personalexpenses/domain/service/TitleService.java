@@ -1,5 +1,6 @@
 package br.com.personal.expenses.personalexpenses.domain.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,6 +62,7 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
         titleModel.setUser(user);
     
         titleModel.setId(null);
+        titleModel.setDateRegister(new Date());
 
         titleModel = titleRepository.save(titleModel);
      
@@ -88,6 +90,15 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
         titleRepository.deleteById(id);
     }
     
+    public List<TitleResponseDTO> getTitleByDateDue(String periodInitial, String periodFinal) {
+        
+        List<Title> titles = titleRepository.getCashFlowByDateDue(periodInitial, periodFinal);
+
+        List<TitleResponseDTO> titlesResponse = titles.stream().map(t -> mapper.map(t, TitleResponseDTO.class)).collect(Collectors.toList());
+
+        return titlesResponse;
+
+    }
 
     private void validateTitle(TitleRequestDTO titleDto) {
         
@@ -95,4 +106,6 @@ public class TitleService implements CRUDService<TitleRequestDTO, TitleResponseD
             throw new ResourceBadRequestException("os campos Tipo, Data de Vencimento, Valor e Descrição são obrigatórios.");
         }
     }
+
+ 
 }
